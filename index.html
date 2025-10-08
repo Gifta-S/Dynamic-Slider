@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dynamic Image Slider</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f0f0f0;
+    }
+
+    .slider-container {
+      position: relative;
+      width: 80%;
+      margin: 50px auto;
+      overflow: hidden;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      background: #fff;
+    }
+
+    .slider {
+      display: flex;
+      transition: transform 0.5s ease-in-out;
+      width: 100%;
+    }
+
+    .slide {
+      min-width: 100%;
+      box-sizing: border-box;
+    }
+
+    .slide img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    #prev, #next {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 24px;
+      border-radius: 50%;
+    }
+
+    #prev {
+      left: 10px;
+    }
+
+    #next {
+      right: 10px;
+    }
+
+    #prev:hover, #next:hover {
+      background-color: rgba(0,0,0,0.8);
+    }
+  </style>
+</head>
+<body>
+  <div class="slider-container">
+    <div class="slider" id="slider">
+      <!-- Replace these with actual image paths -->
+      <div class="slide">
+        <img src="public/images/tom.jpg" alt="Tom" />
+      </div>
+      <div class="slide">
+        <img src="public/images/yyyyy.jpg" alt="YYYYY" />
+      </div>
+    </div>
+    <button id="prev">⟨</button>
+    <button id="next">⟩</button>
+  </div>
+
+  <script>
+    const slider = document.getElementById('slider');
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prev');
+    const nextBtn = document.getElementById('next');
+
+    let index = 0;
+
+    function showSlide(i) {
+      slider.style.transform = `translateX(-${i * 100}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      index = (index > 0) ? index - 1 : slides.length - 1;
+      showSlide(index);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      index = (index < slides.length - 1) ? index + 1 : 0;
+      showSlide(index);
+    });
+  </script>
+</body>
+</html>
